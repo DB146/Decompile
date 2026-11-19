@@ -22,9 +22,10 @@ jobs:
           java-version: '17'
 
       - name: Download and install JADX
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          JADX_VERSION="1.5.1"
-          wget -q "https://github.com{JADX_VERSION}/jadx-${JADX_VERSION}.zip" -O jadx.zip
+          gh release download v1.5.1 --repo skylot/jadx --pattern "jadx-1.5.1.zip" -O jadx.zip
           unzip -q jadx.zip -d jadx
           chmod +x jadx/bin/jadx
 
