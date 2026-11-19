@@ -30,12 +30,14 @@ jobs:
           chmod +x jadx/bin/jadx
 
       - name: Decompile APK
+        continue-on-error: true
         run: |
-          ./jadx/bin/jadx --no-fail -d decompiled_output "${{ github.event.inputs.apk_path }}"
+          ./jadx/bin/jadx -d decompiled_output "${{ github.event.inputs.apk_path }}"
 
       - name: Upload decompiled source as artifact
         uses: actions/upload-artifact@v4
         with:
           name: jadx-decompiled-source
           path: decompiled_output/
+
 
